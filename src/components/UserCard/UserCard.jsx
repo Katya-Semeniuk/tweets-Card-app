@@ -17,20 +17,23 @@ import defaultAvatar from "../../assets/user_avatar.png";
 import PropTypes from "prop-types";
 
 const UserCard = ({ user }) => {
-  const { name, avatar, tweets, followers } = user;
+  const { id, avatar, tweets, followers } = user;
 
+  const avatarUrl = avatar || defaultAvatar;
   const formattedNumber = numeral(followers).format("0,0");
-  const initialFollowers = localStorage.getItem("followers") || formattedNumber;
-  const initialStatusAktiv = localStorage.getItem("statusAktiv") === "true";
 
+  const initialFollowers =
+    localStorage.getItem(`followers_${id}`) || formattedNumber;
+  const initialStatusAktiv =
+    localStorage.getItem(`statusAktiv_${id}`) === "true";
   const [followersOfUser, setFollowersOfUser] = useState(initialFollowers);
   const [statusButtonAktive, setstatusButtonAktive] =
     useState(initialStatusAktiv);
 
   useEffect(() => {
-    localStorage.setItem("followers", followersOfUser);
-    localStorage.setItem("statusAktiv", statusButtonAktive.toString());
-  }, [followersOfUser, statusButtonAktive]);
+    localStorage.setItem(`followers_${id}`, followersOfUser);
+    localStorage.setItem(`statusAktiv_${id}`, statusButtonAktive.toString());
+  }, [followersOfUser, statusButtonAktive, id]);
 
   const handleClickButton = () => {
     if (statusButtonAktive) {
@@ -49,10 +52,9 @@ const UserCard = ({ user }) => {
       <Bg_Images src={bg_pictures} alt="Pictures" width="308" height="168" />
       <HorizontalLine />
       <StyledAvatar>
-        <img src={avatar && defaultAvatar} alt="Avatar" />
+        <img src={avatarUrl} alt="Avatar" />
       </StyledAvatar>
       <Wrapp>
-        <div>{name}</div>
         <UserInfo>{tweets} TWEETS</UserInfo>
         <UserInfo>{followersOfUser} FOLLOWERS</UserInfo>
       </Wrapp>
@@ -71,13 +73,11 @@ const UserCard = ({ user }) => {
 export default UserCard;
 
 UserCard.propTypes = {
-  user: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      name: PropTypes.string,
-      avatar: PropTypes.string,
-      tweets: PropTypes.number,
-      followers: PropTypes.number,
-    })
-  ),
+  user: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    name: PropTypes.string,
+    avatar: PropTypes.string,
+    tweets: PropTypes.number,
+    followers: PropTypes.number,
+  }),
 };

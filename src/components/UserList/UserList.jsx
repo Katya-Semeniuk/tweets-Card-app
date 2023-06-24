@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Notify } from "notiflix/build/notiflix-notify-aio";
 import { Loader } from "../Loader/Loader";
 import UserCard from "../UserCard/UserCard";
-import { Button } from "./UserList.styled";
+import { Button, List, Item } from "./UserList.styled";
 import { fetchUsers } from "../../api/API";
 
 export const UserList = () => {
@@ -15,7 +15,8 @@ export const UserList = () => {
     fetchUsers(page)
       .then(({ data }) => {
         const arrayOfUsers = data;
-        setUsers((prevState) => [...prevState, ...arrayOfUsers]);
+        setUsers(arrayOfUsers);
+        // setUsers((prevState) => [...prevState, ...arrayOfUsers]);
         setStatus("resolved");
       })
       .catch((error) => {
@@ -23,7 +24,6 @@ export const UserList = () => {
         setStatus("error");
       });
   }, [page]);
-
   const handleClickLoadMore = () => {
     console.log("handleClickLoadMore");
     setPage((prevPage) => prevPage + 1);
@@ -35,16 +35,18 @@ export const UserList = () => {
     <div>
       {status === "pending" && <Loader />}
       {status === "resolved" && (
-        <ul>
-          {users.map((user) => (
-            <li key={user.id}>
-              <UserCard user={user} />
-            </li>
-          ))}
+        <div>
+          <List>
+            {users.map((user) => (
+              <Item key={user.id}>
+                <UserCard user={user} />
+              </Item>
+            ))}
+          </List>
           <Button type="button" onClick={handleClickLoadMore}>
             Load More
           </Button>
-        </ul>
+        </div>
       )}
     </div>
   );
