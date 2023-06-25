@@ -1,9 +1,7 @@
 # tweets-Card-app
 
 tweets-Card-app – це додаток, створений за
-допомогою React. Це універсальний інструмент для підвищення
-продуктивності, який допоможе вам завжди бути в курсі ваших завдань, подій та
-дедлайнів.
+допомогою React.
 
 ## Getting started :
 
@@ -38,4 +36,4 @@ GooseTrack's Calendar - надає повний огляд вашого розк
 
   #### Links:
 
-![Backend repository](https://)
+![Backend repository](https://mockapi.io/projects/642b22b4208dfe254712bcd9)
