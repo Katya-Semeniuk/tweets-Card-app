@@ -8,25 +8,25 @@ import { fetchUsers } from "../../api/API";
 export const UserList = () => {
   const [status, setStatus] = useState("");
   const [users, setUsers] = useState([]);
-  const [page, setPage] = useState(1);
+  const [visibleUsers, setVisibleUsers] = useState(3);
 
   useEffect(() => {
     setStatus("pending");
-    fetchUsers(page)
+    fetchUsers()
       .then(({ data }) => {
         const arrayOfUsers = data;
         setUsers(arrayOfUsers);
-        // setUsers((prevState) => [...prevState, ...arrayOfUsers]);
+        setVisibleUsers(3);
         setStatus("resolved");
       })
       .catch((error) => {
         console.log(error.message);
         setStatus("error");
       });
-  }, [page]);
+  }, []);
+
   const handleClickLoadMore = () => {
-    console.log("handleClickLoadMore");
-    setPage((prevPage) => prevPage + 1);
+    setVisibleUsers((prevVisibleUsers) => prevVisibleUsers + 3);
   };
   if (status === "error") {
     return Notify.failure("Something went wrong");
@@ -37,15 +37,17 @@ export const UserList = () => {
       {status === "resolved" && (
         <div>
           <List>
-            {users.map((user) => (
+            {users.slice(0, visibleUsers).map((user) => (
               <Item key={user.id}>
                 <UserCard user={user} />
               </Item>
             ))}
           </List>
-          <Button type="button" onClick={handleClickLoadMore}>
-            Load More
-          </Button>
+          {visibleUsers !== users.length - 1 && (
+            <Button type="button" onClick={handleClickLoadMore}>
+              Load More
+            </Button>
+          )}
         </div>
       )}
     </div>

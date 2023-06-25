@@ -21,6 +21,7 @@ export const Item = styled.li`
 export const Button = styled.button`
   display: flex;
   justify-content: center;
+  margin-top: 20px;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
