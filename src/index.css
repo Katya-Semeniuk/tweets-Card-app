@@ -19,3 +19,24 @@ img {
   max-width: 100%;
   height: auto;
 }
+html {
+  background-image: linear-gradient(to top, #6e5ac8, #d4bdeb);
+  background-repeat: no-repeat;
+  width: 100%;
+  min-height: 100%;
+}
+body {
+  font-family: Montserrat, sans-serif;
+}
+:root {
+  --text-dark-color: #373737;
+  --text-light-color: #ebd8ff;
+  --primary-green-color: #5cd3a8;
+  --accent-green-color: #4ebb94;
+  --primary-pink-color: #ebd8ff;
+  --accent-pink-color: #d4bdeb;
+  --primary-blue-color: #471ca9;
+
+  --primary-logo-color: #674fd3;
+  --accent-logo-color: #471ca9;
+}

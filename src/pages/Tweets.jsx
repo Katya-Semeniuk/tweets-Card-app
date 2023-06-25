@@ -1,13 +1,13 @@
-import { NavLink } from "react-router-dom";
 import { UserList } from "../components/UserList/UserList";
 import { BsArrowLeft } from "react-icons/bs";
+import { StyledNav } from "./Tweets.styled";
 const Tweets = () => {
   return (
     <div>
-      <button type="button">
+      <StyledNav to="/">
         <BsArrowLeft />
-        <NavLink to="/"> Back </NavLink>
-      </button>
+        Back
+      </StyledNav>
       <UserList />
     </div>
   );

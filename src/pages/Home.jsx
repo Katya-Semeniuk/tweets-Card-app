@@ -1,13 +1,25 @@
+import {
+  Container,
+  Title,
+  Text,
+  ContentBox,
+  StyledNavLink,
+} from "./Home.styled";
+
 const Home = () => {
   return (
-    <div>
-      <h1>Welcome to Home Page</h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores labore
-        quos, explicabo blanditiis doloribus fugiat, mollitia vero cum tenetur
-        nulla, pariatur quam dolor in repudiandae rem non corporis nemo? Iure.
-      </p>
-    </div>
+    <Container>
+      <ContentBox>
+        <Title>Welcome to Home Page</Title>
+        <Text>
+          Enjoy viewing users cards and easily find out their details.
+          <br />
+          Change follower status and save it in one click.
+        </Text>
+
+        <StyledNavLink to="/tweets"> start now</StyledNavLink>
+      </ContentBox>
+    </Container>
   );
 };
 export default Home;
